@@ -1,0 +1,14 @@
+{
+  "name": "wdd330-my-final-project",
+  "version": "1.0.0",
+  "description": "The Sneaker Drop Tracker final project for WDD330.",
+  "type": "module",
+  "scripts": {
+    "start": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "devDependencies": {
+    "vite": "^5.4.19"
+  }
+}
