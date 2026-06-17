@@ -1,3 +1,5 @@
+import { sneakerImages } from "./sneakerImages.js";
+
 export class SneakerData {
   constructor(sneakers) {
     this.sneakers = sneakers.map((sneaker) => this.normalizeSneaker(sneaker));
@@ -6,6 +8,7 @@ export class SneakerData {
   normalizeSneaker(sneaker) {
     return {
       ...sneaker,
+      image: sneakerImages[sneaker.id] ?? sneaker.image,
       retailPrice: Number(sneaker.retailPrice),
       sizes: Object.fromEntries(
         Object.entries(sneaker.sizes ?? {}).map(([size, price]) => [

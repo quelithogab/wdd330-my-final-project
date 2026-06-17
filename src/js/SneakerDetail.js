@@ -1,4 +1,3 @@
-import placeholderImage from "../assets/placeholder-shoe.svg?url";
 import { formatDate, money } from "./utils.js";
 
 export class SneakerDetail {
@@ -16,8 +15,6 @@ export class SneakerDetail {
           src="${sneaker.image}"
           alt="${sneaker.name}"
           loading="lazy"
-          referrerpolicy="no-referrer"
-          onerror="this.onerror=null;this.src='${placeholderImage}'"
         />
       </div>
       <h3>${sneaker.name}</h3>

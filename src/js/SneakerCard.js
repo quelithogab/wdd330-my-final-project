@@ -1,4 +1,3 @@
-import placeholderImage from "../assets/placeholder-shoe.svg?url";
 import { formatDate, money } from "./utils.js";
 
 export function createSneakerCard(sneaker, { selected, watched }) {
@@ -12,8 +11,6 @@ export function createSneakerCard(sneaker, { selected, watched }) {
         src="${sneaker.image}"
         alt="${sneaker.name}"
         loading="lazy"
-        referrerpolicy="no-referrer"
-        onerror="this.onerror=null;this.src='${placeholderImage}'"
       />
     </div>
 
