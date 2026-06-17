@@ -34,4 +34,8 @@ export class WatchList {
   count() {
     return this.items.size;
   }
+
+  ids() {
+    return [...this.items];
+  }
 }

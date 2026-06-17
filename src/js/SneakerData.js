@@ -1,6 +1,19 @@
 export class SneakerData {
   constructor(sneakers) {
-    this.sneakers = sneakers;
+    this.sneakers = sneakers.map((sneaker) => this.normalizeSneaker(sneaker));
+  }
+
+  normalizeSneaker(sneaker) {
+    return {
+      ...sneaker,
+      retailPrice: Number(sneaker.retailPrice),
+      sizes: Object.fromEntries(
+        Object.entries(sneaker.sizes ?? {}).map(([size, price]) => [
+          size,
+          Number(price)
+        ])
+      )
+    };
   }
 
   getAll() {
@@ -11,6 +24,11 @@ export class SneakerData {
 
   findById(id) {
     return this.sneakers.find((sneaker) => sneaker.id === id);
+  }
+
+  findByIds(ids) {
+    const idSet = new Set(ids);
+    return this.getAll().filter((sneaker) => idSet.has(sneaker.id));
   }
 
   filter({ brand = "all", query = "" }) {

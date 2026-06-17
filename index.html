@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Sneaker Drop Tracker</title>
-    <link rel="stylesheet" href="/src/css/styles.css" />
-    <script type="module" src="/src/js/main.js"></script>
+    <link rel="stylesheet" href="./src/css/styles.css" />
+    <script type="module" src="./src/js/main.js"></script>
   </head>
   <body>
     <div id="site-header"></div>
@@ -21,10 +21,16 @@
           </p>
         </div>
 
-        <div class="hero-stat" aria-live="polite">
+        <button
+          id="watchlist-toggle"
+          class="hero-stat hero-stat-button"
+          type="button"
+          aria-pressed="false"
+          aria-controls="sneaker-grid"
+        >
           <span id="watchlist-count">0</span>
-          <p>Saved Grails</p>
-        </div>
+          <p id="watchlist-label">Saved Grails</p>
+        </button>
       </section>
 
       <section class="controls" aria-label="Search and filter sneakers">
@@ -58,7 +64,7 @@
 
         <aside class="sidebar" aria-label="Selected sneaker details and news">
           <section class="panel">
-            <p class="eyebrow">Selected Sneaker</p>
+            <p id="detail-panel-label" class="eyebrow">Selected Sneaker</p>
             <div id="detail-content"></div>
           </section>
 

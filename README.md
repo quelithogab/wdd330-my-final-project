@@ -31,6 +31,16 @@ npm start
 
 Then open the localhost URL shown in the terminal.
 
+## Build For GitHub Pages
+
+The Vite config uses a relative base path, so the production build works from a GitHub Pages subpath.
+
+```bash
+npm run build
+```
+
+Upload or deploy the generated `dist` folder to GitHub Pages.
+
 ## Optional NewsAPI Setup
 
 Create a `.env` file in the project root:

@@ -25,7 +25,8 @@ body {
     linear-gradient(135deg, rgba(255, 90, 95, 0.08), transparent 28rem),
     radial-gradient(circle at 92% 8%, rgba(31, 122, 92, 0.12), transparent 22rem),
     var(--paper);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
 }
 
 button,
@@ -131,6 +132,14 @@ p {
   margin-top: 0;
 }
 
+h1,
+h2,
+h3,
+.brand-mark strong {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.01em;
+}
+
 h1 {
   max-width: 12ch;
   margin-bottom: 1rem;
@@ -151,6 +160,23 @@ h2 {
   color: var(--paper);
   text-align: center;
   box-shadow: var(--shadow);
+}
+
+.hero-stat-button {
+  display: grid;
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+}
+
+.hero-stat-button:hover {
+  transform: translateY(-2px);
+  background: var(--accent-deep);
+}
+
+.hero-stat-button:focus-visible {
+  outline: 3px solid rgba(255, 90, 95, 0.4);
+  outline-offset: 4px;
 }
 
 .hero-stat span {
@@ -209,6 +235,14 @@ button {
   transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(255, 90, 95, 0.4);
+  outline-offset: 2px;
+}
+
 button:hover,
 button.active {
   background: var(--ink);
@@ -252,10 +286,20 @@ button:hover {
   display: grid;
   gap: 1rem;
   padding: 1rem;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .sneaker-card.selected {
   border-color: var(--accent);
+}
+
+.sneaker-card:hover {
+  transform: translateY(-2px);
+}
+
+.sneaker-card:focus-within {
+  border-color: var(--accent-deep);
+  box-shadow: 0 0 0 2px rgba(207, 59, 65, 0.14), var(--shadow);
 }
 
 .shoe-frame,

@@ -12,7 +12,10 @@ const watchList = new WatchList();
 const grid = document.querySelector("#sneaker-grid");
 const searchInput = document.querySelector("#search-input");
 const filterButtons = document.querySelectorAll(".brand-filter button");
+const watchlistToggle = document.querySelector("#watchlist-toggle");
 const watchlistCount = document.querySelector("#watchlist-count");
+const watchlistLabel = document.querySelector("#watchlist-label");
+const detailPanelLabel = document.querySelector("#detail-panel-label");
 const statusMessage = document.querySelector("#status-message");
 const detail = new SneakerDetail(document.querySelector("#detail-content"));
 const news = new NewsStream(document.querySelector("#news-content"), services);
@@ -20,12 +23,15 @@ const news = new NewsStream(document.querySelector("#news-content"), services);
 let sneakerData;
 let selectedBrand = "all";
 let selectedSneakerId;
+let showSavedOnly = false;
 
 async function init() {
   try {
+    statusMessage.textContent = "Loading sneaker drops...";
+
     await Promise.all([
-      loadPartial("#site-header", "/src/partials/header.html"),
-      loadPartial("#site-footer", "/src/partials/footer.html")
+      loadPartial("#site-header", "./src/partials/header.html"),
+      loadPartial("#site-footer", "./src/partials/footer.html")
     ]);
 
     const sneakers = await services.getSneakers();
@@ -39,17 +45,64 @@ async function init() {
 }
 
 function render() {
-  const filteredSneakers = sneakerData.filter({
-    brand: selectedBrand,
-    query: searchInput.value
+  if (!sneakerData) {
+    return;
+  }
+
+  const availableSneakers = showSavedOnly
+    ? sneakerData.findByIds(watchList.ids())
+    : sneakerData.getAll();
+
+  const filteredSneakers = availableSneakers.filter((sneaker) => {
+    const matchesBrand = selectedBrand === "all" || sneaker.brand === selectedBrand;
+    const normalizedQuery = searchInput.value.trim().toLowerCase();
+    const searchableText = [
+      sneaker.name,
+      sneaker.brand,
+      sneaker.colorway,
+      sneaker.athlete
+    ]
+      .join(" ")
+      .toLowerCase();
+
+    return matchesBrand && searchableText.includes(normalizedQuery);
   });
 
+  const emptyMessage = showSavedOnly
+    ? "No saved grails yet. Save a sneaker to see it here."
+    : "No sneaker drops match your search.";
+
+  const selectedSneakerIdBefore = selectedSneakerId;
+
+  detailPanelLabel.textContent = showSavedOnly ? "Saved Grails" : "Selected Sneaker";
+
+  const activeFilterButton = [...filterButtons].find((button) => button.dataset.brand === selectedBrand);
+  if (activeFilterButton) {
+    filterButtons.forEach((item) => item.classList.remove("active"));
+    activeFilterButton.classList.add("active");
+  }
+
+  const count = watchList.count();
+  watchlistCount.textContent = count;
+  watchlistLabel.textContent = "Saved Grails";
+  watchlistToggle.setAttribute("aria-pressed", String(showSavedOnly));
+  watchlistToggle.dataset.mode = showSavedOnly ? "saved" : "all";
+
+  statusMessage.textContent = showSavedOnly
+    ? "Showing your saved grails."
+    : "";
+
   grid.innerHTML = "";
-  statusMessage.textContent = "";
-  watchlistCount.textContent = watchList.count();
 
   if (filteredSneakers.length === 0) {
-    grid.innerHTML = `<p class="empty-state">No sneaker drops match your search.</p>`;
+    grid.innerHTML = `<p class="empty-state">${emptyMessage}</p>`;
+    if (showSavedOnly) {
+      const selectedSneaker = sneakerData.findById(selectedSneakerIdBefore);
+      if (selectedSneaker) {
+        detail.render(selectedSneaker);
+        news.render(selectedSneaker.brand);
+      }
+    }
     return;
   }
 
@@ -82,6 +135,12 @@ filterButtons.forEach((button) => {
 
 searchInput.addEventListener("input", render);
 
+watchlistToggle.addEventListener("click", () => {
+  showSavedOnly = !showSavedOnly;
+  watchlistToggle.classList.toggle("active", showSavedOnly);
+  render();
+});
+
 grid.addEventListener("click", (event) => {
   const button = event.target.closest("button");
   const card = event.target.closest(".sneaker-card");
@@ -97,6 +156,10 @@ grid.addEventListener("click", (event) => {
   }
 
   selectedSneakerId = sneakerId;
+  if (showSavedOnly && !watchList.has(sneakerId)) {
+    showSavedOnly = false;
+    watchlistToggle.classList.remove("active");
+  }
   render();
 });
 
