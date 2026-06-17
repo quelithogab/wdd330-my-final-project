@@ -1,13 +1,22 @@
-import jordan4BredReimagined from "../assets/sneakers/jordan-4-bred-reimagined.jpg";
-import travisScottReverseMocha from "../assets/sneakers/jordan-1-low-travis-scott-reverse-mocha.jpg";
-import adidasCampusCoreBlack from "../assets/sneakers/adidas-campus-core-black.jpg";
-import newBalance9060SeaSalt from "../assets/sneakers/new-balance-9060-sea-salt.jpg";
-import nikeAirMax90Infrared from "../assets/sneakers/nike-air-max-90-infrared.jpg";
-
 export const sneakerImages = {
-  "jordan-4-bred-reimagined": jordan4BredReimagined,
-  "jordan-1-low-travis-scott-reverse-mocha": travisScottReverseMocha,
-  "adidas-campus-core-black": adidasCampusCoreBlack,
-  "new-balance-9060-sea-salt": newBalance9060SeaSalt,
-  "nike-air-max-90-infrared": nikeAirMax90Infrared
+  "jordan-4-bred-reimagined": new URL(
+    "../assets/sneakers/jordan-4-bred-reimagined.jpg",
+    import.meta.url
+  ).href,
+  "jordan-1-low-travis-scott-reverse-mocha": new URL(
+    "../assets/sneakers/jordan-1-low-travis-scott-reverse-mocha.jpg",
+    import.meta.url
+  ).href,
+  "adidas-campus-core-black": new URL(
+    "../assets/sneakers/adidas-campus-core-black.jpg",
+    import.meta.url
+  ).href,
+  "new-balance-9060-sea-salt": new URL(
+    "../assets/sneakers/new-balance-9060-sea-salt.jpg",
+    import.meta.url
+  ).href,
+  "nike-air-max-90-infrared": new URL(
+    "../assets/sneakers/nike-air-max-90-infrared.jpg",
+    import.meta.url
+  ).href
 };

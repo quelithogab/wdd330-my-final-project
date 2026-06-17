@@ -3,8 +3,13 @@ const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 
 export class ExternalServices {
   async getSneakers() {
-    const { default: sneakers } = await import("../data/sneakers.json");
-    return sneakers;
+    const response = await fetch(new URL("../data/sneakers.json", import.meta.url));
+
+    if (!response.ok) {
+      throw new Error("Unable to load local sneaker catalog.");
+    }
+
+    return await response.json();
   }
 
   async getNewsByBrand(brand) {
