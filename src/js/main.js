@@ -30,8 +30,8 @@ async function init() {
     statusMessage.textContent = "Loading sneaker drops...";
 
     await Promise.all([
-      loadPartial("#site-header", "./src/partials/header.html"),
-      loadPartial("#site-footer", "./src/partials/footer.html")
+      loadPartial("#site-header", "./partials/header.html"),
+      loadPartial("#site-footer", "./partials/footer.html")
     ]);
 
     const sneakers = await services.getSneakers();
