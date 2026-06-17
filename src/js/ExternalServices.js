@@ -1,5 +1,5 @@
 const NEWS_API_URL = "https://newsapi.org/v2/everything";
-const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
+const NEWS_API_KEY = import.meta.env?.VITE_NEWS_API_KEY;
 
 export class ExternalServices {
   async getSneakers() {
