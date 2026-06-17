@@ -41,6 +41,10 @@ npm run build
 
 Upload or deploy the generated `dist` folder to GitHub Pages.
 
+## Automatic Deployment
+
+This repo includes a GitHub Actions workflow in `.github/workflows/deploy.yml` that builds `dist` and publishes it to GitHub Pages on every push to `main`.
+
 ## Optional NewsAPI Setup
 
 Create a `.env` file in the project root:
