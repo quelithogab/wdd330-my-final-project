@@ -25,9 +25,15 @@ export class NewsStream {
         .map(
           (article) => `
             <article class="news-card">
-              <h3>${article.title}</h3>
+              <h3>
+                <a href="${article.url}" target="_blank" rel="noopener noreferrer">
+                  ${article.title}
+                </a>
+              </h3>
               <p>${article.description ?? "Latest sneaker and streetwear update."}</p>
-              <a href="${article.url}" target="_blank" rel="noreferrer">Read article</a>
+              <a class="news-link" href="${article.url}" target="_blank" rel="noopener noreferrer">
+                Open article
+              </a>
             </article>
           `
         )

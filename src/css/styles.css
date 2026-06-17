@@ -440,6 +440,11 @@ button:hover {
   font-weight: 900;
 }
 
+.news-link {
+  display: inline-flex;
+  margin-top: 0.5rem;
+}
+
 .empty-state {
   padding: 2rem;
   border: 1px dashed var(--line);
