@@ -8,7 +8,17 @@
     <script type="module" src="./src/js/main.js"></script>
   </head>
   <body>
-    <div id="site-header"></div>
+    <header class="site-header">
+      <a class="brand-mark" href="./">
+        <span>SDT</span>
+        <strong>Sneaker Drop Tracker</strong>
+      </a>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="#release-calendar">Drops</a>
+        <a href="#news-panel">News</a>
+      </nav>
+    </header>
 
     <main class="app-shell">
       <section class="hero" aria-labelledby="page-title">
@@ -76,6 +86,9 @@
       </section>
     </main>
 
-    <div id="site-footer"></div>
+    <footer class="site-footer">
+      <p>&copy; 2026 The Sneaker Drop Tracker</p>
+      <p>WDD330 Final Project with ES modules, localStorage, and external API support.</p>
+    </footer>
   </body>
 </html>

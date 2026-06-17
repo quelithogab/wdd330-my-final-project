@@ -4,7 +4,6 @@ import { createSneakerCard } from "./SneakerCard.js";
 import { SneakerDetail } from "./SneakerDetail.js";
 import { WatchList } from "./WatchList.js";
 import { NewsStream } from "./NewsStream.js";
-import { loadPartial } from "./utils.js";
 
 const services = new ExternalServices();
 const watchList = new WatchList();
@@ -28,11 +27,6 @@ let showSavedOnly = false;
 async function init() {
   try {
     statusMessage.textContent = "Loading sneaker drops...";
-
-    await Promise.all([
-      loadPartial("#site-header", "./partials/header.html"),
-      loadPartial("#site-footer", "./partials/footer.html")
-    ]);
 
     const sneakers = await services.getSneakers();
     sneakerData = new SneakerData(sneakers);
